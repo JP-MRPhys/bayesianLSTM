@@ -8,11 +8,8 @@ def compute_KL_univariate_prior(univariateprior, theta, sample):
         """
         :param prior:  assuming univariate prior of Normal(m,s);
         :param posterior: (theta: mean,std) to create posterior q(w/theta) i.e. Normal(mean,std)
-        :param sample:
-        :return:
-
+        :param sample: Number of sample
         """
-
         sample=tf.reshape(sample, [-1])  #flatten vector
         (mean,std)=theta
         mean =tf.reshape(mean, [-1])
@@ -32,7 +29,6 @@ def compute_KL_univariate_prior(univariateprior, theta, sample):
 
 
 def variationalPosterior(shape, name, prior, istraining):
-
     """
     this function create a variational posterior q(w/theta) over a given "weight:w" of the network
     theta is parameterized by mean+standard*noise we apply the reparameterization trick from kingma et al, 2014
