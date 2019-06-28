@@ -1,0 +1,20 @@
+import tensorflow as tf
+import tensorflow_probability as tfp
+
+
+features=[]
+labels=[]
+
+model = tf.keras.Sequential([
+    tfp.layers.DenseReparameterization(512, activation=tf.nn.relu),
+    tfp.layers.DenseReparameterization(10),
+])
+
+logits = model(features)
+neg_log_likelihood = tf.nn.softmax_cross_entropy_with_logits(
+    labels=labels, logits=logits)
+kl = sum(model.losses)
+loss = neg_log_likelihood + kl
+train_op = tf.train.AdamOptimizer().minimize(loss)
+
+
