@@ -1,5 +1,5 @@
 
-##Implementation of the Bayesian LSTM in Tensorflow for detail see the blog post. Demonstrating the code for Sentiment analysis task
+## Implementation of the Bayesian LSTM in Tensorflow for detail see the blog post. Demonstrating the code for Sentiment analysis task
 
 For full details see the blog post
 
