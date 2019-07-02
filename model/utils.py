@@ -36,10 +36,9 @@ def variationalPosterior(shape, name, prior, istraining):
     posterior p(w/D) by computing KL loss for each variational posterior q(w/theta) with prior(w)
 
     :param name: is the name of the tensor/variable to create variational posterior  q(w/Q) for true posterior (p(w/D))
-    :param shape: is the shape of the weigth variable
+    :param shape: is the shape of the weight variable
     :param training: whether in training or inference mode
-    :return: samples (i.e. weights), mean of weigths, std in-case of the training there is noise assoicated
-    with the weights
+    :return: samples (i.e. weights), mean of weights, std in-case of the training there is noise add to the weights
     """
     # theta=mu+sigma i.e. theta = mu+sigma i.e. mu+log(1+exp(rho)), log(1+exp(rho))
     # is the computed by using tf.math.softplus(rho)

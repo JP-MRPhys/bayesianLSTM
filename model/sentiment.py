@@ -33,10 +33,9 @@ class SentimentAnalysisMultiLayerLSTM:
 
 
 
-            self.outputs2 = self.final_lstm_outputs  #[:, -1]  # take the last output of the LSTM
             self.softmax_w, self.softmax_w_mean, self.softmax_w_std=  variationalPosterior((self.lstm_sizes[-1], self.num_classes), "softmax_w", self.prior, self.isTraining)
             self.softmax_b, self.softmax_b_mean, self.softmax_b_std = variationalPosterior((self.num_classes), "softmax_b", self.prior, self.isTraining)
-            self.logits=tf.nn.xw_plus_b(self.outputs2,  self.softmax_w,self.softmax_b)
+            self.logits=tf.nn.xw_plus_b(self.final_lstm_outputs,  self.softmax_w,self.softmax_b)
 
         with tf.variable_scope('rnn_loss', reuse=tf.AUTO_REUSE):
 
@@ -102,10 +101,11 @@ class SentimentAnalysisMultiLayerLSTM:
         """
         Create the LSTM layers
         inputs: array containing size of hidden layer for each lstm,
-                input_embedding, for the shape batch_size, sequence_length, emddeding dimension [None, None, 384], None and None are to handle variable batch size and variable sequence length
+                input_embedding, for the shape batch_size, sequence_length, emddeding dimension [None, None, 384],
+                None and None are to handle variable batch size and variable sequence length
                 keep_prob for the dropout and batch_size
 
-        outputs: initial state for the RNN (lstm) : tuple of [(batch_size, hidden_layer_1), (batch_size, hidden_layer_2)] .. only two here e.g. [(256,128), (256,64)]
+        outputs: initial state for the RNN (lstm) : tuple of [(batch_size, hidden_layer_1), (batch_size, hidden_layer_2)]
                  outputs of the RNN [Batch_size, sequence_length, last_hidden_layer_dim]
                  RNN cell: tensorflow implementation of the RNN cell
                  final state: tuple of [(batch_size, hidden_layer_1), (batch_size, hidden_layer_2)]
@@ -123,7 +123,7 @@ class SentimentAnalysisMultiLayerLSTM:
         # perform dynamic unrolling of the network, for variable
         #lstm_outputs, final_state = tf.nn.dynamic_rnn(cell, embed_input, initial_state=initial_state)
 
-        # we avoid dynamic RNN, as this produces while loop errors see for details
+        # we avoid dynamic RNN, as this produces while loop errors related to gradient checking
         if True:
             outputs = []
             state = initial_state
