@@ -9,4 +9,4 @@ Original paper: https://arxiv.org/pdf/1704.02798.pdf
 
 TODO: Implement Posterior sharpening and Mean field inference 
 
-docker image: jehillparikh/betamlstack:v2
+docker image: jehillparikh/betamlstack:v2 (for all dependency employed in this project)
