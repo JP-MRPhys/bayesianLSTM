@@ -1,5 +1,5 @@
 
-## Implementation of Bayesian LSTM in Tensorflow for detail 
+## Implementation of Bayesian LSTM in Tensorflow
 
 For full details see the blog post
 
